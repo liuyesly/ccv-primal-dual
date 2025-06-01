@@ -1,0 +1,23 @@
+clear; close all;
+currentPath = pwd;
+% Get a list of all files and folders in the current path
+allItems = dir(currentPath);
+
+% Remove '.' and '..' which represent current and parent directories
+allItems = allItems(~ismember({allItems.name}, {'.', '..'}));
+
+% Preallocate a cell array to store all full paths
+allPaths = cell(length(allItems), 1);
+
+% Construct the full path for each item
+for i = 1:length(allItems)
+    allPaths{i} = fullfile(currentPath, allItems(i).name);
+end
+
+% Display the paths (optional)
+disp(allPaths);
+
+
+% load data
+load('data/ClutterDataset.mat');
+load('data/SV_Dict.mat');
